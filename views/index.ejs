@@ -1,0 +1,117 @@
+<!-- ============================================================
+     index.ejs: homepage (also used for search and category results)
+     Receives "products" and "heading" from server.js
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ---------- 1. HEAD: page settings (not visible on the page) ---------- -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luscious Creativity</title>
+    <!-- Link to the stylesheet in the public folder -->
+    <link rel="stylesheet" href="/styles.css">
+    <!-- Icon library for the footer social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ---------- 2. HEADER: logo, menu and search ---------- -->
+    <header>
+        <!-- Logo: clicking it goes to the homepage -->
+        <a href="/" class="logo">
+            <img src="/images/IMG-20261105-WA0010.jpg" alt="Luscious Creativity">
+        </a>
+
+        <!-- Navigation menu -->
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="/">Shop</a></li>
+                <li><a href="/category/Fragrance">Fragrance</a></li>
+                <li><a href="/category/Body Care">Body Care</a></li>
+                <!-- Cart link with the number of items in it -->
+                <li><a href="/cart">Cart (<%= cartCount %>)</a></li>
+            </ul>
+        </nav>
+
+        <!-- Search box: sends the typed text to the /search route -->
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Search...">
+        </form>
+    </header>
+
+    <!-- ---------- 3. HERO: brand introduction ---------- -->
+     <%if(locals.showHero){%>
+      <section class="hero">
+        <div class="hero-text">
+            <h1>Luscious Creativity</h1>
+            <p>Luscious Finds is your convenient destination for beauty essentials and affordable fashion. We bring you a variety of beauty products at customer-friendly prices while celebrating creativity through fashion that seamlessly blends traditional clothing with modern trends. At Luscious Finds, we believe beauty, culture, and style should be accessible to everyone.</p>
+            <!-- Scrolls down to the products section -->
+            <a href="#products" class="hero-button">Shop Now</a>
+        </div>
+      </section>
+     <%}%>
+
+    <!-- ---------- 4. PRODUCTS: grid of product cards ---------- -->
+    <section class="featured-products" id="products">
+
+        <!-- Title changes by page: Featured Products, Results for "..." or the category name -->
+        <h2><%= heading %></h2>
+
+        <!-- Message shown when a search or category has no products -->
+        <% if (products.length === 0) { %>
+            <p>No products found.</p>
+        <% } %>
+
+        <!-- Loop: creates one card for each product -->
+        <div class="product-grid">
+            <% products.forEach(product => { %>
+                <div class="product-card">
+                    <!-- Picture and name link to the product page -->
+                    <a href="/product/<%= product.id %>">
+                        <img src="<%= product.image %>" alt="<%= product.name %>">
+                        <h3><%= product.name %></h3>
+                    </a>
+                    <p>Ksh <%= product.price %></p>
+                </div>
+            <% }) %>
+        </div>
+    </section>
+
+    <!-- ---------- 5. FOOTER: contact, social links and credits ---------- -->
+    <footer>
+
+        <!-- Brand name and short tagline -->
+        <div class="footer-brand">
+            <h4>Luscious Creativity</h4>
+            <p>Beauty, culture and style for everyone.</p>
+        </div>
+
+        <!-- Contact information -->
+        <div class="footer-contact">
+            <h4>Contact</h4>
+            <p><i class="fa-solid fa-phone"></i> 0708 456 167</p>
+            <p><i class="fa-solid fa-envelope"></i> hello@yourbrand.com</p>
+            <p><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</p>
+        </div>
+
+        <!-- Social media links: open in a new tab -->
+        <div class="footer-social">
+            <h4>Follow Us</h4>
+            <a href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com/YOUR_PAGE" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://tiktok.com/@YOUR_HANDLE" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/254708456167" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+
+        <!-- Fun credit line at the very bottom -->
+        <div class="footer-credit">
+            <p>© 2026 Luscious Creativity · Made by an unserious gen-Z 😄</p>
+        </div>
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!-- ============================================================
+     cart.ejs: shopping cart page (/cart)
+     Receives "items" (products in the cart) and "total" from server.js
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ---------- 1. HEAD: page settings (not visible on the page) ---------- -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Luscious Creativity</title>
+    <!-- Link to the stylesheet in the public folder -->
+    <link rel="stylesheet" href="/styles.css">
+    <!-- Icon library for the footer social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ---------- 2. HEADER: logo, menu and search ---------- -->
+    <header>
+        <!-- Logo: clicking it goes to the homepage -->
+        <a href="/" class="logo">
+            <img src="/images/IMG-20261105-WA0010.jpg" alt="Luscious Creativity">
+        </a>
+
+        <!-- Navigation menu -->
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="/">Shop</a></li>
+                <li><a href="/category/Fragrance">Fragrance</a></li>
+                <li><a href="/category/Body Care">Body Care</a></li>
+                <!-- Cart link with the number of items in it -->
+                <li><a href="/cart">Cart (<%= cartCount %>)</a></li>
+            </ul>
+        </nav>
+
+        <!-- Search box: sends the typed text to the /search route -->
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Search...">
+        </form>
+    </header>
+
+    <!-- ---------- 3. CART: items, quantities and total ---------- -->
+    <section class="cart">
+        <h2>Your Cart</h2>
+
+        <!-- If the cart is empty, show a message and a button back to the shop -->
+        <% if (items.length === 0) { %>
+            <p>Your cart is empty.</p>
+            <a href="/" class="hero-button">Continue Shopping</a>
+
+        <!-- Otherwise, list every item -->
+        <% } else { %>
+
+            <!-- Loop: one row for each product in the cart -->
+            <% items.forEach(item => { %>
+                <div class="cart-item">
+                    <img src="<%= item.image %>" alt="<%= item.name %>">
+
+                    <!-- Name, price x quantity and subtotal -->
+                    <div class="cart-details">
+                        <h3><%= item.name %></h3>
+                        <p>Ksh <%= item.price %> × <%= item.quantity %></p>
+                        <p>Subtotal: Ksh <%= item.subtotal %></p>
+                    </div>
+
+                    <!-- Remove button: sends this product's id to /cart/remove -->
+                    <form action="/cart/remove/<%= item.id %>" method="POST">
+                        <button type="submit">Remove</button>
+                    </form>
+                </div>
+            <% }) %>
+
+            <!-- Total of everything in the cart -->
+            <h3 class="cart-total">Total: Ksh <%= total %></h3>
+
+        <% } %>
+    </section>
+
+    <!-- ---------- 4. FOOTER: contact, social links and credits ---------- -->
+    <footer>
+
+        <!-- Brand name and short tagline -->
+        <div class="footer-brand">
+            <h4>Luscious Creativity</h4>
+            <p>Beauty, culture and style for everyone.</p>
+        </div>
+
+        <!-- Contact information -->
+        <div class="footer-contact">
+            <h4>Contact</h4>
+            <p><i class="fa-solid fa-phone"></i> 0708 456 167</p>
+            <p><i class="fa-solid fa-envelope"></i> hello@yourbrand.com</p>
+            <p><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</p>
+        </div>
+
+        <!-- Social media links: open in a new tab -->
+        <div class="footer-social">
+            <h4>Follow Us</h4>
+            <a href="https://instagram.com/YOUR_HANDLE" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com/YOUR_PAGE" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://tiktok.com/@YOUR_HANDLE" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/254708456167" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+
+        <!-- Fun credit line at the very bottom -->
+        <div class="footer-credit">
+            <p>© 2026 Luscious Creativity · Made by an unserious gen-Z 😄</p>
+        </div>
+
+    </footer>
+
+</body>
+</html>

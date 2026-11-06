@@ -1,0 +1,337 @@
+/* ============================================================
+ *  styles.css: design for the Luscious Creativity website
+ *  Used by: index.ejs, product.ejs, cart.ejs
+ *  ============================================================ */
+
+
+/* ---------- 1. BRAND COLORS ----------
+ *  Change a color here and it updates across the whole site */
+:root {
+    --pink: #e8648f;        /* main brand pink (buttons, accents) */
+    --pink-light: #fbd3e1;  /* soft blush (backgrounds, borders) */
+    --pink-dark: #cc3f6f;   /* deeper pink (hover effects, icons) */
+    --text: #4a2c37;        /* dark plum for text */
+    --white: #ffffff;
+}
+
+
+/* ---------- 2. GENERAL ---------- */
+body {
+    font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+    color: var(--text);
+}
+
+
+/* ---------- 3. HEADER: logo, menu and search ---------- */
+header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--pink-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+/* Logo image */
+.logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+/* Navigation menu */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+nav ul li a:hover {
+    color: var(--pink-dark);
+}
+
+/* Search box */
+input[type="text"] {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--pink-light);
+    border-radius: 20px;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: var(--pink);
+}
+
+
+/* ---------- 4. HERO: brand intro on the homepage ---------- */
+.hero {
+    background: linear-gradient(135deg, #fbd3e1 0%, #f5a9c3 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 1rem;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-text h1 {
+    font-size: 2.8rem;
+    font-weight: normal;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+}
+
+.hero-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* "Shop Now" and "Continue Shopping" buttons */
+.hero-button {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 2rem;
+    background-color: var(--pink);
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.hero-button:hover {
+    background-color: var(--pink-dark);
+}
+
+
+/* ---------- 5. PRODUCT LIST: homepage, search and categories ---------- */
+.featured-products {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.featured-products h2 {
+    font-weight: normal;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* Grid holding all the product cards */
+.product-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* One product card */
+.product-card {
+    background-color: var(--white);
+    border: 1px solid var(--pink-light);
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+    width: calc(25% - 2rem);
+}
+
+.product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;   /* crops images so all cards look uniform */
+}
+
+.product-card a {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 16px rgba(232, 100, 143, 0.3);
+}
+
+
+/* ---------- 6. PRODUCT PAGE: single product details ---------- */
+.product-detail {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 3rem 2rem;
+}
+
+.image-gallery {
+    flex: 1;
+}
+
+.image-gallery img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+}
+
+.product-info {
+    flex: 1;
+    text-align: left;
+    padding: 0 2rem;
+}
+
+.product-info p {
+    font-size: 1.2rem;
+}
+
+
+/* ---------- 7. CART PAGE ---------- */
+.cart {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+.cart h2 {
+    font-weight: normal;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* One product row in the cart */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--pink-light);
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.cart-details {
+    flex: 1;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 2rem;
+}
+
+
+/* ---------- 8. BUTTONS: Add to Cart, Remove, etc. ---------- */
+button {
+    background-color: var(--pink);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--pink-dark);
+}
+
+
+/* ---------- 9. FOOTER: contact, social links and credits ---------- */
+footer {
+    background-color: var(--pink-light);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 3rem 2rem 1.5rem;
+}
+
+footer h4 {
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: normal;
+    margin: 0 0 1rem;
+}
+
+footer p {
+    margin: 0.4rem 0;
+}
+
+/* Small icons next to the contact details */
+footer i {
+    color: var(--pink-dark);
+    margin-right: 0.5rem;
+}
+
+/* Social media icons */
+.footer-social a {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: var(--pink-dark);
+}
+
+.footer-social a i {
+    margin-right: 0;
+}
+
+.footer-social a:hover {
+    color: var(--pink);
+}
+
+/* Credit line, full width below the columns */
+.footer-credit {
+    width: 100%;
+    text-align: center;
+    border-top: 1px solid var(--pink);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+}
+
+
+/* ---------- 10. PHONES AND SMALL SCREENS ----------
+ *  Applies only when the screen is 768px wide or less */
+@media (max-width: 768px) {
+    /* Two product cards per row instead of four */
+    .product-card {
+        width: calc(50% - 2rem);
+    }
+
+    /* Stack the picture above the product info */
+    .product-detail {
+        flex-direction: column;
+    }
+
+    /* Stack the logo, menu and search vertically */
+    header {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    /* Stack the menu links if they get crowded */
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 0 0.8rem;
+    }
+}
